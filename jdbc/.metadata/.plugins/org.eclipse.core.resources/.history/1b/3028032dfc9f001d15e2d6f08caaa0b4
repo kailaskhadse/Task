@@ -1,0 +1,59 @@
+package jdbcPreparedStatement;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class Test1 {
+	Scanner sc=new Scanner(System.in);
+	public void addTable() throws Exception {
+		Connection cn=Configuration1.buildConnection();
+		String sql="create table persondetails(pid int,pname varchar(20),contact int)";
+		Statement smt=cn.createStatement();
+		smt.execute(sql);
+		smt.close();
+		cn.close();
+		}
+		public void insertData ()throws Exception{
+			Connection cn=Configuration1.buildConnection();
+			Scanner sc= new Scanner(System.in);
+			System.out.println("Enter number of person be added");
+			int n=sc.nextInt();
+			for(int i=1;i<=n;i++) {
+			PersonDetails p= new PersonDetails();
+			System.out.println("Enter person id ");
+			int pid=sc.nextInt();
+			p.setPid(pid);
+			System.out.println("Enter person name :");
+			String pname=sc.next();
+			p.setPname(pname);
+			System.out.println("Enter person contact");
+			int contact=sc.nextInt();
+			p.setContact(contact);
+			String sql1="insert into persondetails values(" + p.getPid()+ ",'" + p.getPname()+"'," + p.getContact()+")";
+			//System.out.println(sql1);
+			Statement smt=cn.createStatement();
+			smt.execute(sql1);
+			smt.close();
+			cn.close();
+			System.out.println("insert value successfullydone");}
+		}
+		public void viewData()throws Exception{
+			Connection cn=Configuration1.buildConnection();
+			String sql2="Select * from persondetails";
+			PreparedStatement prs=cn.prepareStatement(sql2);
+			ResultSet rs=prs.executeQuery();
+			while(rs.next()) {
+				int id=rs.getInt("pid");
+				String name=rs.getString("pname");
+				int contact=rs.getInt("contact");
+				System.out.println("pname:"+name+" "+"pid :"+id+" "+"contact :"+contact );
+				
+			}
+		}
+			
+}
+
+

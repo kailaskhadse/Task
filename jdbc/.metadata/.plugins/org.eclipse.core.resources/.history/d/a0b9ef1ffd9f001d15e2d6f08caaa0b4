@@ -1,0 +1,40 @@
+package jdbcPreparedStatement;
+
+import java.util.Scanner;
+
+public class Finalpd {
+	public static void main(String[] args) throws Exception {
+		Test1 t= new Test1();
+		Scanner sc= new Scanner(System.in);
+		/*PersonDetails p= new PersonDetails();
+		System.out.println("Enter person id ");
+		int pid=sc.nextInt();
+		p.setPid(pid);
+		System.out.println("Enter person name :");
+		String pname=sc.next();
+		p.setPname(pname);
+		System.out.println("Enter person contact");
+		int contact=sc.nextInt();
+		p.setContact(contact);*/
+		//t.addTable();
+		while(true) {
+		System.out.println("Enter choise:\n 1.Create table \n 2.Insert value in table \n 3.view data \n 4.Exist");
+		int choise=sc.nextInt();
+		switch(choise) {
+		case 1:t.addTable();
+		break;
+		case 2:t.insertData();
+		break;
+		case 3:t.viewData();
+		break;
+		case 4:System.exit(0);
+		}
+		
+		}
+		
+		
+	}
+	
+}
+
+
